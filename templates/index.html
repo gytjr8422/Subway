@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>지하철 좌석 정보 시스템</title>
+    <meta http-equiv="refresh" content="3">
+</head>
+<body>
+    <h1>지하철 좌석 정보</h1>
+    <div class="back">
+        <p class="car">1호 차</p>
+    </div>
+    <div class="image">
+        <img src="{{ url_for('static', filename='image/subway_image.jpg') }}" class="sub_img">
+        <div class="weak_div">
+            <p class="weak">교통 약자</p>
+            <p class="weak">배려석</p>
+        </div>
+        <div class="example_1">
+            <p>이용 가능</p>
+            <p>좌석</p>    
+        </div>
+        <div class="example_2">
+            <p>이용 불가능</p>
+            <p>좌석</p>    
+        </div>
+        {% if seat[0][1] == '0' %}
+        {% set s_1 = 1 %}
+        <div class="seat_1_1">
+            <p>1</p>    
+        </div>
+        {% else %}
+        {% set s_1 = 0 %}
+        <div class="seat_1_2">
+            <p>1</p>    
+        </div>
+        {% endif %}
+        {% if seat[0][2] == '0' %}
+        {% set s_2 = 1 %}
+        <div class="seat_2_1">
+            <p>2</p>    
+        </div>
+        {% else %}
+        {% set s_2 = 0 %}
+        <div class="seat_2_2">
+            <p>2</p>    
+        </div>
+        {% endif %}
+        {% if seat[0][3] == '0' %}
+        {% set s_3 = 1 %}
+        <div class="seat_3_1">
+            <p>3</p>    
+        </div>
+        {% else %}
+        {% set s_3 = 0 %}
+        <div class="seat_3_2">
+            <p>3</p>    
+        </div>
+        {% endif %}
+        {% if seat[0][4] == '0' %}
+        {% set s_4 = 1 %}
+        <div class="weak_1_1">
+            <p>4</p>    
+        </div>
+        {% else %}
+        {% set s_4 = 0 %}
+        <div class="weak_1_2">
+            <p>4</p>    
+        </div>
+        {% endif %}
+        {% set count_1 = s_1 + s_2 + s_3 + s_4 %}
+
+        {% if seat[0][5] == '0' %}
+        {% set s_5 = 1 %}
+        {% else %}
+        {% set s_5 = 0 %}
+        {% endif %}
+        {% if seat[0][6] == '0' %}
+        {% set s_6 = 1 %}
+        {% else %}
+        {% set s_6 = 0 %}
+        {% endif %}
+        {% if seat[0][7] == '0' %}
+        {% set s_7 = 1 %}
+        {% else %}
+        {% set s_7 = 0 %}
+        {% endif %}
+        {% if seat[0][8] == '0' %}
+        {% set s_8 = 1 %}
+        {% else %}
+        {% set s_8 = 0 %}
+        {% endif %}
+        {% set count_2 = s_5 + s_6 + s_7 + s_8 %}
+
+    </div>
+    <div class="info">
+        <p class="inform">빈 좌석 수(Empty Seats) :   {{ count_1 }} 석</p>
+        <p class="inform">혼 잡 도(Congestion) :   {{ person[0][1] }} %</p>
+    </div>
+    {% if person[0][1] | int <= 5 %}
+    <div class="recommend_1">
+        <div>
+            1호 차
+            {% if count_1 >= count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+        <div>
+            2호 차
+            {% if count_1 < count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if person[0][1] | int > 5 and person[0][1] | int <= 10 %}
+    <div class="recommend_2">
+        <div>
+            1호 차
+            {% if count_1 >= count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+        <div>
+            2호 차
+            {% if count_1 < count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if person[0][1] | int > 10 and person[0][1] | int <= 15 %}
+    <div class="recommend_3">
+        <div>
+            1호 차
+            {% if count_1 >= count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+        <div>
+            2호 차
+            {% if count_1 < count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if person[0][1] | int > 15 and person[0][1] | int <= 20 %}
+    <div class="recommend_4">
+        <div>
+            1호 차
+            {% if count_1 >= count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+        <div>
+            2호 차
+            {% if count_1 < count_2 %}
+            <p class="reco">추천!</p>
+            {% endif %}
+        </div>
+    {% endif %}
+    </div>    
+</body>
+</html>
